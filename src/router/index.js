@@ -23,6 +23,11 @@ export default new VueRouter({
                     path: "point",
                     name: "point",
                     component: () => import("../components/charts/Point")
+                },
+                {
+                    path: "line",
+                    name: "line",
+                    component: () => import("../components/charts/Line")
                 }
             ]
         },
