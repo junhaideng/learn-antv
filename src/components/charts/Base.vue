@@ -10,10 +10,10 @@
 
 <script>
 import Base from "../common/Base";
-import G2 from "@antv/g2";
+import { Chart } from "@antv/g2";
 
 export default {
-  name: "Interval",
+  name: "",
   components: {
     Base,
   },
@@ -21,7 +21,7 @@ export default {
     return {
       data: [],
       chart: undefined,
-      title: "柱形图",
+      title: "",
     };
   },
   mounted() {
@@ -31,9 +31,10 @@ export default {
   },
   methods: {
     set() {
+      // 设置数据，因为是异步请求的数据，必须在请求到数据之后设置 chart
       return new Promise((resolve, reject) => {
         this.$axios
-          .get("/api/get_column_data")
+          .get("/api/get_xxx_data")
           .then((res) => {
             this.data = res.data.data;
             resolve();
@@ -45,18 +46,18 @@ export default {
       });
     },
     draw() {
-      this.chart = new G2.Chart({
-        container: "chart",
-        forceFit: true,
+      this.chart = new Chart({
+        container: "chart", // 容器
+        autoFit: true,  // 自适应大小 ， 设置之后width， height 不生效
         width: 600,
-        height: 300,
+        height: 500,
       });
-      this.chart.source(this.data);
+      this.chart.data(this.data);  // 加载数据
 
       this.chart
-        .point()
+        .point()  // 散点图
         .position("feature*value")
-        .color("phone");
+        .color("phone"); // 分类
       this.chart.render();
     },
   },

@@ -1,15 +1,15 @@
 <template>
   <div>
-     <a-row :style="{ margin: 'auto', textAlign: 'center' }">
+    <a-row :style="{ margin: 'auto', textAlign: 'center' }">
       <h2>{{ title }}</h2>
     </a-row>
-        <div id="chart"></div>
+    <div id="chart"></div>
   </div>
 </template>
 
 <script>
 import Base from "../common/Base";
-import G2 from "@antv/g2";
+import {Chart} from "@antv/g2";
 
 export default {
   name: "Interval",
@@ -20,7 +20,7 @@ export default {
     return {
       data: [],
       chart: undefined,
-      title: "散点图"
+      title: "散点图",
     };
   },
   mounted() {
@@ -32,7 +32,7 @@ export default {
     set() {
       return new Promise((resolve, reject) => {
         this.$axios
-          .get("/api/get_column_data")
+          .get("/api/get_point_data")
           .then((res) => {
             this.data = res.data.data;
             resolve();
@@ -44,18 +44,26 @@ export default {
       });
     },
     draw() {
-      this.chart = new G2.Chart({
+      this.chart = new Chart({
         container: "chart",
-        forceFit: true,
+        autoFit: true,
         width: 600,
-        height: 300,
+        height: 500,
       });
-      this.chart.source(this.data);
-   
+      this.chart.data(this.data);
+
       this.chart
         .point()
         .position("feature*value")
         .color("phone");
+
+      this.chart.tooltip({
+        showCrosshairs: true,
+        crosshairs: {
+          type: "xy", // 展示十字辅助线
+        },
+      });
+
       this.chart.render();
     },
   },
