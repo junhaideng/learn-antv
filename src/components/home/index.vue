@@ -5,7 +5,7 @@
            
            <a-row :style="{ margin: 'auto'}">
              <a-col :span="24" >
-                <a-tag>{{index}}</a-tag> : <a :href="item.href">{{item.title}}</a>
+                <a-tag>{{index +1}}</a-tag> : <a :href="item.href">{{item.title}}</a>
              </a-col>
            </a-row>
           </a-list-item>
@@ -25,6 +25,9 @@ const data = [
   },{
     title: "散点图",
     href: "/chart/point"
+  },{
+    title: "折线图",
+    href: "/chart/line"
   }
 ]
 

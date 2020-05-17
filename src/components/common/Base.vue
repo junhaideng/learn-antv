@@ -29,7 +29,7 @@ export default {
   props: {
     height: {
       default() {
-        return "578px";
+        return "678px";
       },
     },
     width: {
