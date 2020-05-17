@@ -6,9 +6,7 @@ import router from "./router/index"
 import VueRouter from 'vue-router'
 import "./mock/index"
 import axios from 'axios'
-import G2 from "@antv/g2"
 
-Vue.use(G2)
 
 Vue.prototype.$axios = axios
 
