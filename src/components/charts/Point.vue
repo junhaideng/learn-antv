@@ -55,7 +55,9 @@ export default {
       this.chart
         .point()
         .position("feature*value")
-        .color("phone");
+        .color("phone")
+        .shape("phone", ['circle', 'square', 'triangle'])
+        .size(6);
 
       this.chart.tooltip({
         showCrosshairs: true,
